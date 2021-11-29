@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NavController } from '@ionic/angular';
+import { UserAPIService } from '../../../services/user-api.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -12,10 +15,23 @@ export class ProfilePage implements OnInit {
   buttonValue = 'grid';
   buttonItems: any[] = [];
   posts: any[] = [];
+  userInfo:any;
 
-  constructor() { }
+  constructor
+  (
+    private navCtrl: NavController,
+    private api: UserAPIService,
+
+  ) { }
 
   ngOnInit() {
+    
+      // this.userInfo = this.api.isAuth();
+    
+    this.api.getUser().then(res=>{
+      this.userInfo = res;
+      console.log('user info is', this.userInfo);
+    })
     this.stories = [
       { name: 'New'},
       { name: 'Vscode', src: 'assets/imgs/circles/vscode.png'},
@@ -79,6 +95,13 @@ export class ProfilePage implements OnInit {
 
   buttonsChanged(event){
     this.buttonValue = event.detail.value;
+  }
+
+  getImage(){
+    if(this.userInfo.picture.thumbnail)
+      return this.userInfo.picture.thumbnail;
+
+    return 'assets/imgs/logo.png';
   }
 
 }

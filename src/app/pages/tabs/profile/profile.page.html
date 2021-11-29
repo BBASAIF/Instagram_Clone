@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title color="dark" mode="md">
-      Profile
+      {{this.userInfo.login.username}}
       <ion-icon name="chevron-down-outline"></ion-icon>
     </ion-title>
     <ion-buttons slot="end">
@@ -26,7 +26,7 @@
           </ion-fab-button>
         </ion-fab>
         <ion-thumbnail>
-          <img src="assets/imgs/logo.png" alt="">
+          <img src="{{this.userInfo.picture.thumbnail}}" alt="">
         </ion-thumbnail>
       </ion-col>
       <ion-col size="3" class="ion-text-center">
@@ -51,7 +51,7 @@
     <ion-row class="marginTop">
       <ion-col>
         <ion-label>
-          Peter Parker
+          {{this.userInfo.name.title}} {{this.userInfo.name.first}} {{this.userInfo.name.last}}
           <ion-text color="medium" class="ion-margin-start info"> NodeJS Programmer </ion-text>
           <ion-row>
             <ion-text color="medium" class="ion-text-justify description">
