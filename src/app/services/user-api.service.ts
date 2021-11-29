@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,19 @@ export class UserAPIService {
 
   baseApiUrl: any = 'https://randomuser.me/api/';
   userData: any;
+  public tab = new BehaviorSubject<any>(null);
+  public reload = new BehaviorSubject<boolean>(false);
+  // Reload = this.reload.asObservable();
 
-  constructor
-  (
-    private http: HttpClient,
-  ) {
-    
+  constructor(private http: HttpClient,) {
     this.loadUser();
 
    }
 
-   async loadUser() 
+   async loadUser()
    {
-      const user = await localStorage.getItem('user');    
-      if (user) 
+      const user = await localStorage.getItem('user');
+      if (user)
       {
         this.userData = JSON.parse(user);
         console.log('userdata in loaddata is', this.userData);
@@ -35,20 +35,20 @@ export class UserAPIService {
           (res: any) => {
             // console.log('random user api is', res);
             if(res.results){
-            
+
               localStorage.setItem('user', JSON.stringify(res.results[0]));
               this.userData = res.results[0];
               console.log('random user api in userapi service userdata is', this.userData);
               resolve(res.results[0]);
             } else {
-              reject(res)
+              reject(res);
             }
           },
           (err) => {
-            reject(err)
+            reject(err);
           }
         );
-      })
+      });
     }
 
     getData() {
@@ -57,11 +57,15 @@ export class UserAPIService {
       header = header.set('Access-Control-Allow-Origin', '*');
       header = header.set('Access-Control-Allow-Headers', '*');
       header = header.set('Accept', 'application/json, text/plain');
-      return this.http.get(this.baseApiUrl, { headers: header })
+      return this.http.get(this.baseApiUrl, { headers: header });
     }
 
     public isAuth() {
       return !!this.userData;
     }
-  
+
+    setTab(val){
+      this.tab.next(val);
+    }
+
 }

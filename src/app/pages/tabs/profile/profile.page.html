@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title color="dark" mode="md">
-      {{this.userInfo.login.username}}
+      {{this.username}}
       <ion-icon name="chevron-down-outline"></ion-icon>
     </ion-title>
     <ion-buttons slot="end">
@@ -26,11 +26,11 @@
           </ion-fab-button>
         </ion-fab>
         <ion-thumbnail>
-          <img src="{{this.userInfo.picture.thumbnail}}" alt="">
+          <img src="{{this.profileimg}}" alt="">
         </ion-thumbnail>
       </ion-col>
       <ion-col size="3" class="ion-text-center">
-        <strong>81</strong>
+        <strong>{{this.posts.length}}</strong>
         <p>
           <ion-text color="medium">Posts</ion-text>
         </p>
@@ -51,7 +51,7 @@
     <ion-row class="marginTop">
       <ion-col>
         <ion-label>
-          {{this.userInfo.name.title}} {{this.userInfo.name.first}} {{this.userInfo.name.last}}
+          {{this.title}} {{this.first}} {{this.last}}
           <ion-text color="medium" class="ion-margin-start info"> NodeJS Programmer </ion-text>
           <ion-row>
             <ion-text color="medium" class="ion-text-justify description">
@@ -123,7 +123,7 @@
               <div class="image-container" [style.background-image]="'url(' + item?.url + ')'"></div>
             </ion-col>
             <ion-col size="4">
-              <div *ngIf="posts[i + 1]" class="image-container" [style.background-image]="'url(' + posts[i+1]?.url + ')'"></div>
+              <div *ngIf="posts[i + 1]" class="image-container" [style.background-image]="'url(' + posts[i+1]?.url + ')'" alt='lorem ipsum'></div>
             </ion-col>
             <ion-col size="4">
               <div *ngIf="posts[i + 2]" class="image-container" [style.background-image]="'url(' + posts[i+2]?.url + ')'"></div>
