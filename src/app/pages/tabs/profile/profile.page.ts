@@ -78,7 +78,6 @@ export class ProfilePage implements OnInit {
   }
 
   buttonsChanged(event){
-    console.log(event.detal.value);
     this.buttonValue = event.detail.value;
   }
 
