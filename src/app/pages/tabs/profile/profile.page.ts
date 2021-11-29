@@ -41,18 +41,18 @@ export class ProfilePage implements OnInit {
       {value: 'photos', icon:'images'},
     ];
     this.posts = [
-      {id: 1, url: 'assets/imgs/posts/1.jpg'},
-      {id: 2, url: 'assets/imgs/posts/2.jpg'},
-      {id: 3, url: 'assets/imgs/posts/3.jpg'},
-      {id: 4, url: 'assets/imgs/posts/4.jpg'},
-      {id: 5, url: 'assets/imgs/posts/5.jpg'},
-      {id: 6, url: 'assets/imgs/posts/6.jpg'},
-      {id: 7, url: 'assets/imgs/posts/7.jpg'},
-      {id: 8, url: 'assets/imgs/posts/8.jpg'},
-      {id: 9, url: 'assets/imgs/posts/9.jpg'},
-      {id: 10, url: 'assets/imgs/posts/10.jpg'},
-      {id: 11, url: 'assets/imgs/posts/11.jpg'},
-      {id: 12, url: 'assets/imgs/posts/12.jpg'},
+      {id: 1, url: 'https://picsum.photos/id/217/200'},
+      {id: 2, url: 'https://picsum.photos/id/227/200'},
+      {id: 3, url: 'https://picsum.photos/id/237/200'},
+      {id: 4, url: 'https://picsum.photos/id/247/200'},
+      {id: 5, url: 'https://picsum.photos/id/257/200'},
+      {id: 6, url: 'https://picsum.photos/id/267/200'},
+      {id: 7, url: 'https://picsum.photos/id/277/200'},
+      {id: 8, url: 'https://picsum.photos/id/287/200'},
+      {id: 9, url: 'https://picsum.photos/id/297/200'},
+      {id: 10, url: 'https://picsum.photos/id/117/200'},
+      {id: 11, url: 'https://picsum.photos/id/127/200'},
+      {id: 12, url: 'https://picsum.photos/id/137/200'},
 
     ];
   }
