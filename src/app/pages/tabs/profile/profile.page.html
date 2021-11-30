@@ -83,7 +83,7 @@
   </ion-grid>
 
   <div [ngSwitch]="buttonValue">
-    <ion-list lines="none" *ngSwitchCase="'grid'" class="photo-grid">
+    <ion-list lines="none" *ngSwitchCase="'grid'" class="photo-grid" routerLink="/tabs/home">
       <div *ngFor="let item of posts; let i = index">
         <ion-grid *ngIf="i%3 === 0" class="noPadding">
           <ion-row *ngIf="i%9 === 0">

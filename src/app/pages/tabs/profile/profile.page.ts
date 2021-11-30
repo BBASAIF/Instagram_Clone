@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UserAPIService } from '../../../services/user-api.service';
 import { OptionComponent } from './option/option.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -24,9 +25,17 @@ export class ProfilePage implements OnInit {
 
 
 
-  constructor(private api: UserAPIService, private modalCtrl: ModalController) { }
+  constructor(private api: UserAPIService, private modalCtrl: ModalController, private activeRoute: ActivatedRoute,) { }
 
   ngOnInit() {
+
+    this.activeRoute.paramMap.subscribe(params => {
+      this.username = params.get('username');
+      this.profileimg= params.get('profileimg');
+      console.log('username is', this.username);
+      if(this.username && this.profileimg == null)
+    {
+     this.userInfo = this.api.isAuth();
     const user = JSON.parse(localStorage.getItem('user0'));
     this.userInfo = user;
     this.title = this.userInfo.name.title;
@@ -35,8 +44,11 @@ export class ProfilePage implements OnInit {
     this.profileimg = this.userInfo.picture.thumbnail;
     this.username = this.userInfo.login.username;
 
-    //   console.log('user info is', this.userInfo);
-    // });
+      console.log('user info is', this.userInfo);
+    }
+    });
+    
+  // });
     this.stories = [
       { name: 'New'},
       { name: 'Vscode', src: 'assets/imgs/circles/vscode.png'},
@@ -103,8 +115,8 @@ export class ProfilePage implements OnInit {
   }
 
   getImage(){
-    if(this.userInfo.picture.thumbnail){
-      return this.userInfo.picture.thumbnail;
+    if(this.userInfo){
+      return this.userInfo;
     }
     return 'assets/imgs/logo.png';
   }
