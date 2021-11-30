@@ -17,7 +17,7 @@ export class TabsPage implements OnInit {
   }
 
   setCurrentTab(event){
-    console.log(event);
+    //console.log(event);
     this.selectTab = this.tabs.getSelected();
   }
 

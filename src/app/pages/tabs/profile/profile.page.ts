@@ -27,16 +27,16 @@ export class ProfilePage implements OnInit {
   constructor(private api: UserAPIService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.api.getUser().then(res=>{
-      this.userInfo = res;
-     this.title = this.userInfo.name.title;
-     this.first = this.userInfo.name.first;
-     this.last = this.userInfo.name.last;
-     this.profileimg = this.userInfo.picture.thumbnail;
-     this.username = this.userInfo.login.username;
+    const user = JSON.parse(localStorage.getItem('user0'));
+    this.userInfo = user;
+    this.title = this.userInfo.name.title;
+    this.first = this.userInfo.name.first;
+    this.last = this.userInfo.name.last;
+    this.profileimg = this.userInfo.picture.thumbnail;
+    this.username = this.userInfo.login.username;
 
-      console.log('user info is', this.userInfo);
-    });
+    //   console.log('user info is', this.userInfo);
+    // });
     this.stories = [
       { name: 'New'},
       { name: 'Vscode', src: 'assets/imgs/circles/vscode.png'},

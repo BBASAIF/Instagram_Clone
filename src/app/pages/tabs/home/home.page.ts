@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UserAPIService } from '../../../services/user-api.service';
+// import { NavController } from '@ionic/angular';
+// import { comments } from '../comments/comments-routing.module';
+// import { NavController } from '@ionic/angular';
+// simport { Router } from '@angular/router';
 
 
 @Component({
@@ -9,7 +13,8 @@ import { UserAPIService } from '../../../services/user-api.service';
 })
 export class HomePage implements OnInit {
 
-  userInfo: any;
+  //userInfo: any;
+  usersData: any;
   title: any[] = [];
   first: any[] = [];
   last: any[] = [];
@@ -19,15 +24,27 @@ export class HomePage implements OnInit {
   constructor(private api: UserAPIService) { }
 
   ngOnInit() {
-    for(let i = 0; i < 10; i++){
-      this.api.getUser().then(res=>{
-        this.userInfo = res;
-        this.title.push(this.userInfo.name.title);
-        this.first.push(this.userInfo.name.first);
-        this.last.push(this.userInfo.name.last);
-        this.profileimg.push(this.userInfo.picture.thumbnail);
-        this.username.push(this.userInfo.login.username);
-      });
+      this.loadUser();
+  }
+
+  // goAnOtherPage() {
+  //   this.route.navigate(['/comments']);
+  // }
+
+  async loadUser()
+  {
+    await this.api.getUsers();
+    for(let i = 0; i < 20; i++){
+      const user = JSON.parse(localStorage.getItem('user'+i));
+      if (user)
+      {
+        this.usersData = user;
+        this.title.push(this.usersData.title);
+        this.first.push(this.usersData.first);
+        this.last.push(this.usersData.last);
+        this.profileimg.push(this.usersData.picture.thumbnail);
+        this.username.push(this.usersData.login.username);
+      }
     }
   }
 
