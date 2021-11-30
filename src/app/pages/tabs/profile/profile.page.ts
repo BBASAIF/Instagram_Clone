@@ -25,17 +25,11 @@ export class ProfilePage implements OnInit {
 
 
 
+
   constructor(private api: UserAPIService, private modalCtrl: ModalController, private activeRoute: ActivatedRoute,) { }
 
   ngOnInit() {
-
-    this.activeRoute.paramMap.subscribe(params => {
-      this.username = params.get('username');
-      this.profileimg= params.get('profileimg');
-      console.log('username is', this.username);
-      if(this.username && this.profileimg == null)
-    {
-     this.userInfo = this.api.isAuth();
+    this.userInfo = this.api.isAuth();
     const user = JSON.parse(localStorage.getItem('user0'));
     this.userInfo = user;
     this.title = this.userInfo.name.title;
@@ -45,10 +39,18 @@ export class ProfilePage implements OnInit {
     this.username = this.userInfo.login.username;
 
       console.log('user info is', this.userInfo);
-    }
+    this.activeRoute.paramMap.subscribe(params => {
+      if(params.get('username') != null){
+        this.username = params.get('username');
+        this.profileimg= params.get('profileimg');
+        this.title= params.get('title');
+        this.first= params.get('first');
+        this.last= params.get('last');
+      }else{
+        console.log('username is', this.first);
+      }
     });
-    
-  // });
+
     this.stories = [
       { name: 'New'},
       { name: 'Vscode', src: 'assets/imgs/circles/vscode.png'},

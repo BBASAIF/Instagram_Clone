@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
   async loadUser()
   {
     await this.api.getUsers();
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 10; i++){
       const user = JSON.parse(localStorage.getItem('user'+i));
       this.items.push( this.items.length );
       if (user)
@@ -70,14 +70,14 @@ export class HomePage implements OnInit {
 
     setTimeout(() => {
      this.api.getUsers();
-      for(let i = 0; i < 5; i++){
+      for(let i = 0; i < 10; i++){
         const user = JSON.parse(localStorage.getItem('user'+i));
         this.items.push( this.items.length );
-        if (this.items.length == 0) {
-          this.message = "No Records"
+        if (this.items.length === 0) {
+          this.message = 'No Records';
         }
-       
-      
+
+
         if (user)
         {
           this.usersData = user;
@@ -88,11 +88,11 @@ export class HomePage implements OnInit {
           this.username.push(this.usersData.login.username);
         }
       }
-  
+
       this.offset += this.limit;
       if (infiniteScroll) {
         infiniteScroll.target.complete();
-  
+
         if (this.items.length < this.limit) {
           infiniteScroll.target.disabled = true;
         }
@@ -104,16 +104,16 @@ export class HomePage implements OnInit {
   }
 
   addFav(item = null){
-    if(item.favorite == false){
+    if(item.favorite === false){
       item.favorite = true;
     }else{
       item.favorite =false;
     }
-    
+
   }
 
   OtherShare(){
-      
+
     // this.socialSharing.share('this is only title for share to socail media for Instagram Clone Challenge').then(() => {
      alert('The App has Successfuly Shared.');
   //   }, err => {

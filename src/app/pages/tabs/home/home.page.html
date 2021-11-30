@@ -44,7 +44,7 @@
   <div class="post-list">
     <div class="post-item" *ngFor="let i of this.items">
       <div class="post-header">
-        <ion-row class="ion-justify-content-center ion-align-items-center" (click)="openProfile(this.username[i], this.profileimg[i] )">
+        <ion-row class="ion-justify-content-center ion-align-items-center" (click)="openProfile(this.username[i], this.profileimg[i])">
           <ion-col size="auto">
             <ion-avatar class="avatar-sm">
               <img src="{{this.profileimg[i]}}" alt="">
@@ -117,7 +117,7 @@
     </div>
   </div>
 
-  <div *ngIf="this.message == 'No Records'" [message]="message" threshold="100px"></div>
+  <div *ngIf="this.message === 'No Records'" [message]="message" threshold="100px"></div>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" *ngIf="items.length">
     <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
