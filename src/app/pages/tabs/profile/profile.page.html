@@ -50,23 +50,12 @@
         Follow me for NodeJS tips and tricks - Experienced Full stack Developer. <a href="https://otekit.com/en">Otekit</a>
       </div>
     </div>
-    <ion-row class="marginTop">
-      <ion-col size="4">
-        <ion-button mode="ios" expand="black" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Edit Profile</ion-text>
-        </ion-button>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button mode="ios" expand="black" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Insights</ion-text>
-        </ion-button>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button mode="ios" expand="black" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Contact</ion-text>
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <div class="ion-padding">
+      <ion-button expand="block" fill="outline" color="dark" size="small">
+        Edit Profile
+      </ion-button>
+    </div>
+
     <ion-row>
       <ion-slides [options]="slideOpts">
         <ion-slide *ngFor="let item of stories; let i = index">
