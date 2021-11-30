@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { UserAPIService } from '../../../services/user-api.service';
+import { OptionComponent } from './option/option.component';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +24,7 @@ export class ProfilePage implements OnInit {
 
 
 
-  constructor(private api: UserAPIService) { }
+  constructor(private api: UserAPIService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.api.getUser().then(res=>{
@@ -104,8 +106,17 @@ export class ProfilePage implements OnInit {
     if(this.userInfo.picture.thumbnail){
       return this.userInfo.picture.thumbnail;
     }
-
     return 'assets/imgs/logo.png';
   }
 
+  async options(){
+    const options = {
+      component: OptionComponent,
+      cssClass: 'custom-modal',
+      swipeToClose: true //ios Only
+    };
+    const modal = await this.modalCtrl.create(options);
+    await modal.present();
+    // const {data} = await modal.onWillDismiss();
+  }
 }
