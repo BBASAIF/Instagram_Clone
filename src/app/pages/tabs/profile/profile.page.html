@@ -18,49 +18,38 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col size="3" class="thumbnail">
-        <ion-fab vertical="bottom" horizontal="right">
-          <ion-fab-button>
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <ion-thumbnail>
+    <ion-row class="profile-header ion-align-items-center">
+      <ion-col size="auto">
+        <ion-avatar class="avatar-lg has-update has-status">
           <img src="{{this.profileimg}}" alt="">
-        </ion-thumbnail>
+        </ion-avatar>
       </ion-col>
-      <ion-col size="3" class="ion-text-center">
-        <strong>{{this.posts.length}}</strong>
-        <p>
-          <ion-text color="medium">Posts</ion-text>
-        </p>
-      </ion-col>
-      <ion-col size="3" class="ion-text-center">
-        <strong>23.6K</strong>
-        <p>
-          <ion-text color="medium">Followers</ion-text>
-        </p>
-      </ion-col>
-      <ion-col size="3" class="ion-text-center">
-        <strong>200</strong>
-        <p>
-          <ion-text color="medium">Following</ion-text>
-        </p>
-      </ion-col>
-    </ion-row>
-    <ion-row class="marginTop">
       <ion-col>
-        <ion-label>
-          {{this.title}} {{this.first}} {{this.last}}
-          <ion-text color="medium" class="ion-margin-start info"> NodeJS Programmer </ion-text>
-          <ion-row>
-            <ion-text color="medium" class="ion-text-justify description">
-              Follow me for NodeJS tips and tricks - Experienced Full stack Developer. <a href="https://otekit.com/en">Otekit</a>
-            </ion-text>
-          </ion-row>
-        </ion-label>
+        <ion-row class="profile-stats">
+          <ion-col>
+            <div class="stats-number">1,329</div>
+            <div class="stats-label">Posts</div>
+          </ion-col>
+          <ion-col>
+            <div class="stats-number">9,329</div>
+            <div class="stats-label">Followers</div>
+          </ion-col>
+          <ion-col>
+            <div class="stats-number">5,329</div>
+            <div class="stats-label">Following</div>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
+    <div class="ion-padding profile-info">
+      <strong>{{this.title}} {{this.first}} {{this.last}}</strong>
+      <div>
+        NodeJS Programmer
+      </div>
+      <div>
+        Follow me for NodeJS tips and tricks - Experienced Full stack Developer. <a href="https://otekit.com/en">Otekit</a>
+      </div>
+    </div>
     <ion-row class="marginTop">
       <ion-col size="4">
         <ion-button mode="ios" expand="black" size="small" fill="outline" color="medium">

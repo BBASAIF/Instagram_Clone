@@ -27,9 +27,19 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
       }
     ]
  }
+//  ,
+//   {
+//     path: '',
+//     loadChildren: () => import('./comments/comments.module').then( m => m.CommentsPageModule)
+//   }
 
 ];
 

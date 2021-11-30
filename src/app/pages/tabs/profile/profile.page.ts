@@ -119,4 +119,6 @@ export class ProfilePage implements OnInit {
     await modal.present();
     // const {data} = await modal.onWillDismiss();
   }
+
+
 }
