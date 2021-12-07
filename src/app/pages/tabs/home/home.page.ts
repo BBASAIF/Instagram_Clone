@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   limit = 50;
   offset = 0;
   res: any;
-  is_fav = false;
+  isFav = false;
 
   constructor(private api: UserAPIService,
     //  private socialSharing: SocialSharing
@@ -49,9 +49,9 @@ export class HomePage implements OnInit {
   async loadUser()
   {
     await this.api.getUsers();
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 15; i++){
       const user = JSON.parse(localStorage.getItem('user'+i));
-      this.items.push( this.items.length );
+      this.items.push( this.items.length);
       if (user)
       {
         this.usersData = user;
@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
 
     setTimeout(() => {
      this.api.getUsers();
-      for(let i = 0; i < 10; i++){
+      for(let i = 10; i < 20; i++){
         const user = JSON.parse(localStorage.getItem('user'+i));
         this.items.push( this.items.length );
         if (this.items.length === 0) {
@@ -93,7 +93,7 @@ export class HomePage implements OnInit {
       if (infiniteScroll) {
         infiniteScroll.target.complete();
 
-        if (this.items.length < this.limit) {
+        if (this.items.length > this.limit) {
           infiniteScroll.target.disabled = true;
         }
       }
@@ -104,15 +104,18 @@ export class HomePage implements OnInit {
   }
 
   addFav(item = null){
-    if(item.favorite === false){
+    //console.log(item.favorite);
+    if(this.isFav === false){
       item.favorite = true;
-    }else{
+      this.isFav = true;
+    }else if(this.isFav === true){
       item.favorite =false;
+      this.isFav = false;
     }
 
   }
 
-  OtherShare(){
+  otherShare(){
 
     // this.socialSharing.share('this is only title for share to socail media for Instagram Clone Challenge').then(() => {
      alert('The App has Successfuly Shared.');
