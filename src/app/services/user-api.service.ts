@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserAPIService {
 
-  baseApiUrl: any = 'https://randomuser.me/api/?results=50';
+  baseApiUrl: any = 'https://randomuser.me/api/?results=60';
   userData: any;
   usersData: any[]= [];
   public tab = new BehaviorSubject<any>(null);
@@ -36,10 +36,9 @@ export class UserAPIService {
           (res: any) => {
             //console.log('random user api is', res);
             if(res.results){
-              for(let i = 0; i < 50; i++){
+              for(let i = 0; i < 60; i++){
                 localStorage.setItem('user'+i, JSON.stringify(res.results[i]));
                 this.userData = res.results[i];
-                //console.log('22random user api in userapi service userdata is', this.userData);
                 resolve(res.results[i]);
               }
             } else {

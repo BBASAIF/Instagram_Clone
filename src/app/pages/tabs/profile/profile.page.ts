@@ -22,6 +22,8 @@ export class ProfilePage implements OnInit {
   last: any;
   profileimg: any;
   username: any;
+  userId: any;
+  userData: any;
 
 
 
@@ -38,14 +40,19 @@ export class ProfilePage implements OnInit {
     this.profileimg = this.userInfo.picture.thumbnail;
     this.username = this.userInfo.login.username;
 
-      console.log('user info is', this.userInfo);
+
     this.activeRoute.paramMap.subscribe(params => {
       if(params.get('username') != null){
-        this.username = params.get('username');
-        this.profileimg= params.get('profileimg');
-        this.title= params.get('title');
-        this.first= params.get('first');
-        this.last= params.get('last');
+        this.userId = params.get('username');
+        this.userId++;
+        const user1 = JSON.parse(localStorage.getItem('user'+this.userId));
+        this.userData = user1;
+        console.log('user info is', user1);
+        this.username = this.userData.login.username;
+        this.title = this.userData.name.title;
+        this.first = this.userData.name.first;
+        this.last = this.userData.name.last;
+        this.profileimg = this.userData.picture.thumbnail;
       }else{
         console.log('username is', this.first);
       }

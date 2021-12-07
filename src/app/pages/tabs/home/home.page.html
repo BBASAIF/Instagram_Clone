@@ -44,7 +44,7 @@
   <div class="post-list">
     <div class="post-item" *ngFor="let i of this.items">
       <div class="post-header">
-        <ion-row class="ion-justify-content-center ion-align-items-center" (click)="openProfile(this.username[i+1], this.profileimg[i+1])">
+        <ion-row class="ion-justify-content-center ion-align-items-center" (click)="openProfile(i, i)">
           <ion-col size="auto">
             <ion-avatar class="avatar-sm">
               <img src="{{this.profileimg[i+1]}}" alt="">
@@ -65,7 +65,7 @@
         <ion-row>
           <ion-col>
             <ion-button size="small" fill="clear" color="dark" (click)="addFav(items)">
-              <ion-icon slot="icon-only" [name]="items.favorite ? 'heart' : 'heart-outline'"></ion-icon>
+              <ion-icon slot="icon-only" [name]="isFav ? 'heart' : 'heart-outline'"></ion-icon>
             </ion-button>
             <ion-button size="small" fill="clear" color="dark" routerLink="/comments">
               <ion-icon slot="icon-only" name="chatbubble-outline"></ion-icon>
@@ -117,7 +117,6 @@
     </div>
   </div>
 
-  <div *ngIf="this.message === 'No Records'" [message]="message" threshold="100px"></div>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" *ngIf="items.length">
     <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>

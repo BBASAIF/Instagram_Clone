@@ -47,9 +47,8 @@ export class HomePage implements OnInit {
   async loadUser()
   {
     await this.api.getUsers();
-    for(let i = 0; i < 50; i++){
+    for(let i = 0; i < 60; i++){
       const user = JSON.parse(localStorage.getItem('user'+i));
-      // this.items.push( this.items.length);
       if (user)
       {
         this.usersData = user;
@@ -88,10 +87,8 @@ export class HomePage implements OnInit {
   addFav(item = null){
     //console.log(item.favorite);
     if(this.isFav === false){
-      item.favorite = true;
       this.isFav = true;
     }else if(this.isFav === true){
-      item.favorite =false;
       this.isFav = false;
     }
 
