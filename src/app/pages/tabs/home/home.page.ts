@@ -26,12 +26,14 @@ export class HomePage implements OnInit {
   last: any[] = [];
   profileimg: any[] = [];
   username: any[] = [];
-  items = [];
+  items = [0,1,2,3,4];
   message= '';
   limit = 50;
   offset = 0;
   res: any;
   isFav = false;
+  postNum = 5;
+  postMax = 10;
 
   constructor(private api: UserAPIService,
     //  private socialSharing: SocialSharing
@@ -42,16 +44,12 @@ export class HomePage implements OnInit {
       this.loadUser();
   }
 
-  // goAnOtherPage() {
-  //   this.route.navigate(['/comments']);
-  // }
-
   async loadUser()
   {
     await this.api.getUsers();
-    for(let i = 0; i < 15; i++){
+    for(let i = 0; i < 50; i++){
       const user = JSON.parse(localStorage.getItem('user'+i));
-      this.items.push( this.items.length);
+      // this.items.push( this.items.length);
       if (user)
       {
         this.usersData = user;
@@ -64,30 +62,14 @@ export class HomePage implements OnInit {
     }
   }
 
-
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
 
     setTimeout(() => {
-     this.api.getUsers();
-      for(let i = 10; i < 20; i++){
-        const user = JSON.parse(localStorage.getItem('user'+i));
-        this.items.push( this.items.length );
-        if (this.items.length === 0) {
-          this.message = 'No Records';
-        }
-
-
-        if (user)
-        {
-          this.usersData = user;
-          this.title.push(this.usersData.title);
-          this.first.push(this.usersData.first);
-          this.last.push(this.usersData.last);
-          this.profileimg.push(this.usersData.picture.thumbnail);
-          this.username.push(this.usersData.login.username);
-        }
+      for(this.postNum; this.postNum < this.postMax; this.postNum++){
+        this.items.push(this.postNum);
       }
+      this.postMax= this.postNum+5;
 
       this.offset += this.limit;
       if (infiniteScroll) {
