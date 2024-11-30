@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
-  }
+  },
+  {
+    path: 'profile/:username/:profileimg',
+    loadChildren: () => import('src/app/pages/tabs/profile/profile.module').then( m => m.ProfilePageModule)
+  },
 ];
 
 @NgModule({

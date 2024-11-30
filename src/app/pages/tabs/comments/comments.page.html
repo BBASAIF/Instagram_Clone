@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button color="dark" defaultHref="/tabs/tab1"></ion-back-button>
+      <ion-back-button color="dark" defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
 
     <ion-title>Comments</ion-title>
@@ -16,16 +16,16 @@
 
 <ion-content>
   <div class="comments-list">
-    <div class="comment-item" *ngFor="let i of [1,2,3,4]">
+    <div class="comment-item" *ngFor="let i of [1,3,5,7]">
       <ion-row class="ion-justify-content-center">
         <ion-col size="auto">
           <ion-avatar class="avatar-sm">
-            <img src="assets/img/avatars/{{i}}.jpg" alt="">
+            <img src="{{this.profileimg[i+1]}}" alt="">
           </ion-avatar>
         </ion-col>
         <ion-col>
           <div>
-            <span class="username">spiderman</span>
+            <span class="username">{{this.username[i+1]}}</span>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a href="" class="hash-tag">#labore</a> <a href="" class="hash-tag">#dolore</a> <a href="" class="hash-tag">#magna</a> <a href="" class="hash-tag">#aliqua</a>
           </div>
           <div class="comment-actions">
@@ -44,12 +44,12 @@
           <ion-row class="ion-justify-content-center">
             <ion-col size="auto">
               <ion-avatar class="avatar-xs">
-                <img src="assets/img/avatars/{{i + 2}}.jpg" alt="">
+                <img src="{{this.profileimg[i+2]}}" alt="">
               </ion-avatar>
             </ion-col>
             <ion-col>
               <div>
-                <span class="username">hawkeye</span>
+                <span class="username">{{this.username[i+2]}}</span>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a href="" class="hash-tag">#labore</a> <a href="" class="hash-tag">#dolore</a> <a href="" class="hash-tag">#magna</a> <a href="" class="hash-tag">#aliqua</a>
               </div>
               <div class="comment-actions">
@@ -66,11 +66,11 @@
           <ion-row class="ion-justify-content-center ion-align-items-center">
             <ion-col size="auto">
               <ion-avatar class="avatar-xs">
-                <img src="assets/img/avatars/7.jpg" alt="">
+                <img src="{{this.profileimg[0]}}" alt="">
               </ion-avatar>
             </ion-col>
             <ion-col>
-              <div class="text-muted text-sm">Reply to <strong>spiderman</strong>...</div>
+              <div class="text-muted text-sm">Reply to <strong>{{this.username[i+2]}}</strong>...</div>
             </ion-col>
           </ion-row>
         </div>
@@ -83,7 +83,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-avatar class="avatar-sm" slot="start">
-        <img src="assets/img/avatars/7.jpg" alt="">
+        <img src="{{this.profileimg[0]}}" alt="">
       </ion-avatar>
     </ion-buttons>
 

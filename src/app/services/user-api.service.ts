@@ -7,14 +7,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserAPIService {
 
-  baseApiUrl: any = 'https://randomuser.me/api/';
+  baseApiUrl: any = 'https://randomuser.me/api/?results=60';
   userData: any;
+  usersData: any[]= [];
   public tab = new BehaviorSubject<any>(null);
   public reload = new BehaviorSubject<boolean>(false);
   // Reload = this.reload.asObservable();
 
   constructor(private http: HttpClient,) {
-    this.loadUser();
+    //this.loadUser();
 
    }
 
@@ -23,23 +24,23 @@ export class UserAPIService {
       const user = await localStorage.getItem('user');
       if (user)
       {
-        this.userData = JSON.parse(user);
-        console.log('userdata in loaddata is', this.userData);
+        this.userData = user;
+        //console.log('userdata in loaddata is', this.userData);
+        //return this.userData;
       }
     }
 
-
-    getUser(){
+    getUsers(){
       return new Promise((resolve, reject) => {
         this.getData().subscribe(
           (res: any) => {
-            // console.log('random user api is', res);
+            //console.log('random user api is', res);
             if(res.results){
-
-              localStorage.setItem('user', JSON.stringify(res.results[0]));
-              this.userData = res.results[0];
-              console.log('random user api in userapi service userdata is', this.userData);
-              resolve(res.results[0]);
+              for(let i = 0; i < 60; i++){
+                localStorage.setItem('user'+i, JSON.stringify(res.results[i]));
+                this.userData = res.results[i];
+                resolve(res.results[i]);
+              }
             } else {
               reject(res);
             }

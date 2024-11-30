@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { UserAPIService } from '../../../services/user-api.service';
 import { OptionComponent } from './option/option.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,22 +22,42 @@ export class ProfilePage implements OnInit {
   last: any;
   profileimg: any;
   username: any;
+  userId: any;
+  userData: any;
 
 
 
-  constructor(private api: UserAPIService, private modalCtrl: ModalController) { }
+
+  constructor(private api: UserAPIService, private modalCtrl: ModalController, private activeRoute: ActivatedRoute,) { }
 
   ngOnInit() {
-    this.api.getUser().then(res=>{
-      this.userInfo = res;
-     this.title = this.userInfo.name.title;
-     this.first = this.userInfo.name.first;
-     this.last = this.userInfo.name.last;
-     this.profileimg = this.userInfo.picture.thumbnail;
-     this.username = this.userInfo.login.username;
+    this.userInfo = this.api.isAuth();
+    const user = JSON.parse(localStorage.getItem('user0'));
+    this.userInfo = user;
+    this.title = this.userInfo.name.title;
+    this.first = this.userInfo.name.first;
+    this.last = this.userInfo.name.last;
+    this.profileimg = this.userInfo.picture.thumbnail;
+    this.username = this.userInfo.login.username;
 
-      console.log('user info is', this.userInfo);
+
+    this.activeRoute.paramMap.subscribe(params => {
+      if(params.get('username') != null){
+        this.userId = params.get('username');
+        this.userId++;
+        const user1 = JSON.parse(localStorage.getItem('user'+this.userId));
+        this.userData = user1;
+        console.log('user info is', user1);
+        this.username = this.userData.login.username;
+        this.title = this.userData.name.title;
+        this.first = this.userData.name.first;
+        this.last = this.userData.name.last;
+        this.profileimg = this.userData.picture.thumbnail;
+      }else{
+        console.log('username is', this.first);
+      }
     });
+
     this.stories = [
       { name: 'New'},
       { name: 'Vscode', src: 'assets/imgs/circles/vscode.png'},
@@ -103,8 +124,8 @@ export class ProfilePage implements OnInit {
   }
 
   getImage(){
-    if(this.userInfo.picture.thumbnail){
-      return this.userInfo.picture.thumbnail;
+    if(this.userInfo){
+      return this.userInfo;
     }
     return 'assets/imgs/logo.png';
   }

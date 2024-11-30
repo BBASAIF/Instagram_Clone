@@ -16,7 +16,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content threshold="100px">
   <div class="story-list">
     <div class="scroll-horizontal">
       <div class="scroll-item">
@@ -42,16 +42,16 @@
   </div>
 
   <div class="post-list">
-    <div class="post-item" *ngFor="let i of [1,2,3,4,5]" routerLink="/comments">
+    <div class="post-item" *ngFor="let i of this.items">
       <div class="post-header">
-        <ion-row class="ion-justify-content-center ion-align-items-center">
+        <ion-row class="ion-justify-content-center ion-align-items-center" (click)="openProfile(i, i)">
           <ion-col size="auto">
             <ion-avatar class="avatar-sm">
-              <img src="{{this.profileimg[i]}}" alt="">
+              <img src="{{this.profileimg[i+1]}}" alt="">
             </ion-avatar>
           </ion-col>
           <ion-col>
-            <strong>{{this.username[i]}}</strong>
+            <strong>{{this.username[i+1]}}</strong>
           </ion-col>
           <ion-col size="auto">
             <ion-icon name="ellipsis-horizontal"></ion-icon>
@@ -59,24 +59,19 @@
         </ion-row>
       </div>
       <div class="post-media">
-        <img src="https://picsum.photos/id/5{{i}}/200" alt="">
+        <img src="https://picsum.photos/id/1{{i}}/200" alt="">
       </div>
       <div class="post-actions">
         <ion-row>
           <ion-col>
-            <ion-button size="small" fill="clear" color="dark">
-              <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+            <ion-button size="small" fill="clear" color="dark" (click)="addFav(items)">
+              <ion-icon slot="icon-only" [name]="isFav ? 'heart' : 'heart-outline'"></ion-icon>
             </ion-button>
-            <ion-button size="small" fill="clear" color="dark">
+            <ion-button size="small" fill="clear" color="dark" routerLink="/comments">
               <ion-icon slot="icon-only" name="chatbubble-outline"></ion-icon>
             </ion-button>
-            <ion-button size="small" fill="clear" color="dark">
-              <ion-icon slot="icon-only" name="send-outline"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col size="auto">
-            <ion-button size="small" fill="clear" color="dark">
-              <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+            <ion-button size="small" fill="clear" color="dark" (click)="otherShare()">
+              <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
@@ -88,18 +83,18 @@
 
       <div class="post-comments">
         <div class="comment-item">
-          <span class="username">spiderman</span>
+          <span class="username">{{this.username[i+1]}}</span>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a href="" class="hash-tag">#labore</a> <a href="" class="hash-tag">#dolore</a> <a href="" class="hash-tag">#magna</a> <a href="" class="hash-tag">#aliqua</a>
         </div>
 
-        <div class="comment-expander text-muted">View all 35 comments</div>
+        <div class="comment-expander text-muted" routerLink="/comments">View all 35 comments</div>
 
         <div class="comment-item">
-          <span class="username">steveroger</span>
+          <span class="username">{{this.username[i+2]}}</span>
           Ipsum dolor sit amet, consectetur?
 
           <div class="comment-item reply">
-            <span class="username">spiderman</span>
+            <span class="username">{{this.username[i+1]}}</span>
             Lorem ipsum hehe
           </div>
         </div>
@@ -111,7 +106,7 @@
             </ion-avatar>
           </ion-col>
           <ion-col>
-            <div class="text-muted text-sm">Add a comment...</div>
+            <div class="text-muted text-sm" routerLink="/comments">Add a comment...</div>
           </ion-col>
           <ion-col size="auto">
             😁😂
@@ -121,5 +116,13 @@
       </div>
     </div>
   </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" *ngIf="items.length">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <br>
+  <br>
+  <br>
 
 </ion-content>
